@@ -1,0 +1,6 @@
+<h1> Hello <%= @user.username %> </h1>
+<h2> Here are all clubs </h2>
+<% @clubs.each do |c| %>
+<h3> <%= c.name %> </h3>
+<p> <%= c.description %> </p>
+<% end %>

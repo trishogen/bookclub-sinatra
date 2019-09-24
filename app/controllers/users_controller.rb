@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/create_user'
     else
-      redirect '/' # TODO: redirect to their bookclub page
+      redirect '/clubs'
     end
   end
 
@@ -15,13 +15,13 @@ class UsersController < ApplicationController
       user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
       user.save
       session[:user_id] = user.id
-      redirect '/' # TODO: redirect to their bookclub page
+      redirect '/clubs'
     end
   end
 
   get '/login' do
     if !!logged_in?
-      redirect '/' # TODO: redirect to their bookclub page
+      redirect '/clubs'
     else
       erb :'users/login'
     end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect '/' # TODO: redirect to their bookclub page
+      redirect '/clubs'
     else
       redirect '/signup'
     end
