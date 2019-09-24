@@ -1,6 +1,6 @@
 class Club < ActiveRecord::Base
   has_many :posts
-  has_many :users, through: :user_clubs
+  belongs_to :user
 
   def slug
     self.name.gsub(" ", "-")
