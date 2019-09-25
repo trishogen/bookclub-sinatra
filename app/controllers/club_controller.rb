@@ -28,4 +28,13 @@ class ClubsController < ApplicationController
     redirect '/clubs'
   end
 
+  get '/clubs/:slug' do
+    if !!logged_in?
+      @club = Club.find_by_slug(params[:slug])
+      erb :'clubs/show'
+    else
+      redirect '/login'
+    end
+  end
+
 end
