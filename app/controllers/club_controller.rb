@@ -58,5 +58,13 @@ class ClubsController < ApplicationController
     end
   end
 
-
+  delete '/clubs/:slug' do
+    @club = Club.find_by_slug(params[:slug])
+    if current_user.id == @club.user_id
+      @club.destroy
+      redirect "/clubs"
+    else
+      redirect "/clubs/#{@club.slug}"
+    end
+  end
 end

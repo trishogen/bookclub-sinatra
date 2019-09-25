@@ -1,4 +1,10 @@
 <h2> Club <%= @club.name %></h2>
 <p> <%= @club.description %> </p>
 <a href="/clubs/<%= @club.slug %>/edit">Edit club</a><br>
+
+<form action="/clubs/<%= @club.slug %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Club">
+</form>
+
 Go back to <a href="/clubs"> all clubs</a>
