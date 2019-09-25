@@ -37,4 +37,26 @@ class ClubsController < ApplicationController
     end
   end
 
+  get '/clubs/:slug/edit' do
+    @club = Club.find_by_slug(params[:slug])
+    if current_user.id == @club.user_id
+      erb :'clubs/edit'
+    else
+      redirect "/clubs/#{@club.slug}"
+    end
+  end
+
+  patch '/clubs/:slug' do
+    @club = Club.find_by_slug(params[:slug])
+    if params[:name] == "" or params[:description] == ""
+      redirect "/clubs/#{@club.slug}/edit"
+    elsif current_user.id == @club.user_id
+      @club.update(name: params[:name], description: params[:description])
+      redirect "/clubs/#{@club.slug}"
+    else
+      redirect "/clubs/#{@club.slug}"
+    end
+  end
+
+
 end

@@ -1,0 +1,12 @@
+<h2>Edit <%= @club.name %></h2>
+<form action="/clubs/<%= @club.slug %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <label for="name">Club name:</label>
+  <input type="text" id="name" name="name" value="<%= @club.name %>" required><br>
+
+  <label for="description">Club description:</label>
+  <input type="text" id="description" name="description" value="<%= @club.description %>" required><br>
+
+  <input type="submit" id="submit" name="submit" value="Save">
+</form>
