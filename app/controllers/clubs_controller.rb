@@ -77,7 +77,31 @@ class ClubsController < ApplicationController
     else
       redirect '/login'
     end
+  end
 
+
+  get '/clubs/:slug/posts/new' do
+    @club = Club.find_by_slug(params[:slug])
+
+    if !!logged_in?
+      erb :'posts/new'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/clubs/:slug/posts' do
+    @club = Club.find_by_slug(params[:slug])
+
+    if !logged_in?
+      redirect '/login'
+    elsif params[:title] == "" or params[:content] == ""
+      redirect "/clubs/#{@club.slug}/posts/new"
+    else
+      @club.posts.create(title: params[:title], content: params[:content],
+                          user_id: current_user.id)
+      redirect "/clubs/#{@club.slug}/posts"
+    end
   end
 
 end
