@@ -23,8 +23,8 @@ class ClubsController < ApplicationController
       redirect '/clubs/new'
     end
     user = current_user
-    user.clubs.create(name: params[:name], description: params[:description])
-    user.save
+    user.clubs.create(name: params[:name], description: params[:description],
+                      book_of_the_week: params[:book])
     redirect '/clubs'
   end
 
@@ -51,7 +51,8 @@ class ClubsController < ApplicationController
     if params[:name] == "" or params[:description] == ""
       redirect "/clubs/#{@club.slug}/edit"
     elsif current_user.id == @club.user_id
-      @club.update(name: params[:name], description: params[:description])
+      @club.update(name: params[:name], description: params[:description],
+                    book_of_the_week: params[:book])
       redirect "/clubs/#{@club.slug}"
     else
       redirect "/clubs/#{@club.slug}"

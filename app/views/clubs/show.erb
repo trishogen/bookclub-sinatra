@@ -1,5 +1,7 @@
 <h2> Club <%= @club.name %></h2>
 <p> <%= @club.description %> </p>
+<h3> This week's book: </h3>
+<p> <%= @club.book_of_the_week %> </p>
 <a href="/clubs/<%= @club.slug %>/edit">Edit club</a><br>
 
 <form action="/clubs/<%= @club.slug %>" method="post">
