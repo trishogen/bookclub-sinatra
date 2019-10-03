@@ -136,4 +136,15 @@ class ClubsController < ApplicationController
       redirect "/clubs/#{@club.slug}/posts/#{@post.id}"
     end
   end
+
+  delete '/clubs/:slug/posts/:id' do
+    @club = Club.find_by_slug(params[:slug])
+    @post = Post.find(params[:id])
+    if current_user.id == @post.user_id
+      @post.destroy
+      redirect "/clubs/#{@club.slug}/posts"
+    else
+      redirect "/clubs/#{@club.slug}/posts"
+    end
+  end
 end
