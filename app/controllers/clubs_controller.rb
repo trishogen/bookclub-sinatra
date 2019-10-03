@@ -104,4 +104,14 @@ class ClubsController < ApplicationController
     end
   end
 
+  get '/clubs/:slug/posts/:id' do
+    if !!logged_in?
+      @club = Club.find_by_slug(params[:slug])
+      @post = Post.find(params[:id])
+      erb :'posts/show'
+    else
+      redirect '/login'
+    end
+  end
+
 end

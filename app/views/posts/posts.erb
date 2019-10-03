@@ -1,9 +1,7 @@
 <h1> Here are the posts in <%= @club.name %></h1>
 <% @posts.each do |p| %>
-  <h2> <%= p.title %> </h2>
+  <h2> <a href="/clubs/<%= @club.slug %>/posts/<%= p.id %>"><%= p.title %> </a></h2>
   <h3> <%= p.user.username %> on <%= p.created_at.to_date %> </h3>
-  <p> <%= p.content %> <br><br>
-  Last updated: <%= p.updated_at.to_date %></p>
 <% end %>
 
 Create new post <a href="/clubs/<%= @club.slug %>/posts/new">here</a>
