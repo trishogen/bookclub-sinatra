@@ -4,4 +4,6 @@
   <h3> <%= p.user.username %> on <%= p.created_at.to_date %> </h3>
 <% end %>
 
-Create new post <a href="/clubs/<%= @club.slug %>/posts/new">here</a>
+<a href="/clubs/<%= @club.slug %>">Go back </a> |
+<a href="/clubs/<%= @club.slug %>/posts/new">New post</a> |
+<a href="/clubs">All clubs</a>

@@ -2,13 +2,12 @@
 <p> <%= @club.description %> </p>
 <h3> This week's book: </h3>
 <p> <%= @club.book_of_the_week %> </p> <br>
-View club's <a href="/clubs/<%= @club.slug %>/posts">posts</a><br>
-
-<a href="/clubs/<%= @club.slug %>/edit">Edit club</a><br>
 
 <form action="/clubs/<%= @club.slug %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Club">
 </form>
 
-Go back to <a href="/clubs"> all clubs</a>
+<a href="/clubs/<%= @club.slug %>/edit">Edit club</a> |
+<a href="/clubs/<%= @club.slug %>/posts">View posts</a> |
+<a href="/clubs">All clubs</a>

@@ -3,11 +3,13 @@
 <p> <%= @post.content %> </p>
 Last updated: <%= @post.updated_at.to_date %></p> <br>
 
-<a href="/clubs/<%= @club.slug %>/posts/<%= @post.id %>/edit">Edit post</a><br>
-
 <form action="/clubs/<%= @club.slug %>/posts/<%= @post.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Post">
 </form>
 
-Go back to <a href="/clubs/<%= @club.slug %>/posts"> all posts in <%= @club.name %></a>
+
+<a href="/clubs/<%= @club.slug %>/posts/<%= @post.id %>/edit">Edit post</a> |
+<a href="/clubs/<%= @club.slug %>/posts"> Back to posts</a> |
+<a href="/clubs/<%= @club.slug %>">Back to club </a> |
+<a href="/clubs">All clubs</a>
