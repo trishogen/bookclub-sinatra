@@ -98,8 +98,10 @@ class ClubsController < ApplicationController
     elsif params[:title] == "" or params[:content] == ""
       redirect "/clubs/#{@club.slug}/posts/new"
     else
-      @club.posts.create(title: params[:title], content: params[:content],
-                          user_id: current_user.id)
+      @post = @club.posts.create(title: params[:title], content: params[:content])
+      @post.user = current_user
+      @post.save
+
       redirect "/clubs/#{@club.slug}/posts"
     end
   end
