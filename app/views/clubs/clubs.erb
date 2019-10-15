@@ -1,5 +1,5 @@
 <h1> Hello <%= @user.username %> </h1>
-<h2> Here are all clubs </h2>
+<h2> Select a club to learn more: </h2>
 <% @clubs.each do |c| %>
 <h3> <a href="/clubs/<%= c.slug %>"> <%= c.name %></a> </h3>
 <p> <%= c.description %> </p>

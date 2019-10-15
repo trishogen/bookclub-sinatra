@@ -1,7 +1,9 @@
-<h2> Club <%= @club.name %></h2>
+<h2><%= @club.name %></h2>
 <p> <%= @club.description %> </p>
 <h3> This week's book: </h3>
-<p> <%= @club.book_of_the_week %> </p> <br>
+<p> <%= @club.book_of_the_week %> </p>
+<h3> This club is hosted by: </h3>
+<p> <%= @club.user.username %> </p> <br>
 
 <form action="/clubs/<%= @club.slug %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
