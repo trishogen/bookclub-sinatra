@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     if params[:username] == "" or params[:password] == "" or params[:email] == ""
       redirect '/signup'
     elsif !User.find_by(username: params[:username]).nil?
+      # user with this username already exists
       redirect '/signup'
     else
       user = User.new(:username => params[:username],
