@@ -1,0 +1,11 @@
+<h2>Make a new Post</h2>
+<form action="/clubs/<%= @club.slug %>/posts" method="POST">
+
+  <label for="title">Post title:</label>
+  <input type="text" id="title" name="title" required><br>
+
+  <label for="content">Content:</label>
+  <input type="content" id="content" name="content" required><br>
+
+  <input type="submit" id="submit" name="submit" value="Add a new post!">
+</form>

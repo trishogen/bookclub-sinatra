@@ -1,0 +1,17 @@
+<h2><%= @club.name %></h2>
+<p> <%= @club.description %> </p>
+<h3> This week's book: </h3>
+<p> <%= @club.book_of_the_week %> </p>
+<h3> This club is hosted by: </h3>
+<p> <%= @club.user.username %> </p> <br>
+
+<% if @club.user_id == current_user.id %>
+<form action="/clubs/<%= @club.slug %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Club">
+</form>
+
+  <a href="/clubs/<%= @club.slug %>/edit">Edit club</a> |
+<% end %>
+<a href="/clubs/<%= @club.slug %>/posts">View posts</a> |
+<a href="/clubs">All clubs</a>

@@ -1,0 +1,9 @@
+<h1> Here are the posts in <%= @club.name %></h1>
+<% @posts.each do |p| %>
+  <h2> <a href="/clubs/<%= @club.slug %>/posts/<%= p.id %>"><%= p.title %> </a></h2>
+  <h3> <%= p.user.username %> on <%= p.created_at.to_date %> </h3>
+<% end %>
+
+<a href="/clubs/<%= @club.slug %>">Go back </a> |
+<a href="/clubs/<%= @club.slug %>/posts/new">New post</a> |
+<a href="/clubs">All clubs</a>

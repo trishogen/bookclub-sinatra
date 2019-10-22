@@ -1,0 +1,12 @@
+<h2>Edit Post <%= @post.id %></h2>
+<form action="/clubs/<%= @club.slug %>/posts/<%= @post.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <label for="name">Post title:</label>
+  <input type="text" id="title" name="title" value="<%= @post.title %>" required><br>
+
+  <label for="content">Post content:</label>
+  <input type="text" id="content" name="content" value="<%= @post.content %>" required><br>
+
+  <input type="submit" id="submit" name="submit" value="Save">
+</form>
