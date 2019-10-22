@@ -23,7 +23,6 @@ class ClubsController < ApplicationController
 
   get '/clubs/:slug' do
     redirect_if_not_logged_in
-
     @club = Club.find_by_slug(params[:slug])
 
     if @club.nil?
@@ -35,6 +34,7 @@ class ClubsController < ApplicationController
 
   get '/clubs/:slug/edit' do
     @club = Club.find_by_slug(params[:slug])
+
     if current_user.id == @club.user_id
       erb :'clubs/edit'
     else
@@ -76,6 +76,7 @@ class ClubsController < ApplicationController
 
   get '/clubs/:slug/posts/new' do
     redirect_if_not_logged_in
+
     @club = Club.find_by_slug(params[:slug])
     erb :'posts/new'
   end
@@ -120,10 +121,9 @@ class ClubsController < ApplicationController
       redirect "/clubs/#{@club.slug}/posts/#{@post.id}/edit"
     elsif current_user.id == @post.user_id
       @post.update(title: params[:title], content: params[:content])
-      redirect "/clubs/#{@club.slug}/posts/#{@post.id}"
-    else
-      redirect "/clubs/#{@club.slug}/posts/#{@post.id}"
     end
+
+      redirect "/clubs/#{@club.slug}/posts/#{@post.id}"
   end
 
   delete '/clubs/:slug/posts/:id' do
@@ -131,9 +131,7 @@ class ClubsController < ApplicationController
     @post = Post.find(params[:id])
     if current_user.id == @post.user_id
       @post.destroy
-      redirect "/clubs/#{@club.slug}/posts"
-    else
-      redirect "/clubs/#{@club.slug}/posts"
     end
+      redirect "/clubs/#{@club.slug}/posts"
   end
 end
