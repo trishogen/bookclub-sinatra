@@ -2,7 +2,6 @@ class ClubsController < ApplicationController
 
   get '/clubs' do
     redirect_if_not_logged_in
-    @user = current_user
     @clubs = Club.all
     erb :'clubs/clubs'
   end
