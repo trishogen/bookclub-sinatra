@@ -1,21 +1,15 @@
 class ClubsController < ApplicationController
 
   get '/clubs' do
-    if !!logged_in?
-      @user = current_user
-      @clubs = Club.all
-      erb :'clubs/clubs'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @user = current_user
+    @clubs = Club.all
+    erb :'clubs/clubs'
   end
 
   get '/clubs/new' do
-    if !!logged_in?
-      erb :'clubs/new'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    erb :'clubs/new'
   end
 
   post '/clubs' do
@@ -29,12 +23,15 @@ class ClubsController < ApplicationController
   end
 
   get '/clubs/:slug' do
-    if !!logged_in?
-      @club = Club.find_by_slug(params[:slug])
-      erb :'clubs/show'
-    else
-      redirect '/login'
+    redirect_if_not_logged_in
+
+    @club = Club.find_by_slug(params[:slug])
+
+    if @club.nil?
+      redirect '/clubs'
     end
+
+    erb :'clubs/show'
   end
 
   get '/clubs/:slug/edit' do
@@ -70,32 +67,25 @@ class ClubsController < ApplicationController
   end
 
   get '/clubs/:slug/posts' do
+    redirect_if_not_logged_in
+
     @club = Club.find_by_slug(params[:slug])
     @posts = @club.posts
-    if !!logged_in?
-      erb :'posts/posts'
-    else
-      redirect '/login'
-    end
+    erb :'posts/posts'
   end
 
 
   get '/clubs/:slug/posts/new' do
+    redirect_if_not_logged_in
     @club = Club.find_by_slug(params[:slug])
-
-    if !!logged_in?
-      erb :'posts/new'
-    else
-      redirect '/login'
-    end
+    erb :'posts/new'
   end
 
   post '/clubs/:slug/posts' do
+    redirect_if_not_logged_in
     @club = Club.find_by_slug(params[:slug])
 
-    if !logged_in?
-      redirect '/login'
-    elsif params[:title] == "" or params[:content] == ""
+    if params[:title] == "" or params[:content] == ""
       redirect "/clubs/#{@club.slug}/posts/new"
     else
       @post = @club.posts.create(title: params[:title], content: params[:content])
@@ -107,13 +97,11 @@ class ClubsController < ApplicationController
   end
 
   get '/clubs/:slug/posts/:id' do
-    if !!logged_in?
-      @club = Club.find_by_slug(params[:slug])
-      @post = Post.find(params[:id])
-      erb :'posts/show'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+
+    @club = Club.find_by_slug(params[:slug])
+    @post = Post.find(params[:id])
+    erb :'posts/show'
   end
 
   get '/clubs/:slug/posts/:id/edit' do
