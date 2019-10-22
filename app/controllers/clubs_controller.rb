@@ -65,6 +65,7 @@ class ClubsController < ApplicationController
     end
   end
 
+# TODO: Move all routes accessing post resource to posts_controller
   get '/clubs/:slug/posts' do
     redirect_if_not_logged_in
 
